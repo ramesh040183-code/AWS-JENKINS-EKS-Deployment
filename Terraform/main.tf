@@ -8,14 +8,14 @@ terraform {
     }
   }
 
-#   # ✅ REQUIRED FOR JENKINS / CI-CD
-#   backend "s3" {
-#     bucket         = "your-tf-state-bucket"
-#     key            = "eks/jenkins/terraform.tfstate"
-#     region         = "ap-south-1"
-#     dynamodb_table = "terraform-locks"
-#     encrypt        = true
-#   }
+  # ✅ REQUIRED FOR JENKINS / CI-CD
+  backend "s3" {
+    bucket         = "rd-tf-state-bucket"
+    key            = "eks/jenkins/terraform.tfstate"
+    region         = "ap-south-1"
+    dynamodb_table = "terraform-locks"
+    encrypt        = true
+  }
 }
 
 provider "aws" {
@@ -34,7 +34,7 @@ module "vpc" {
   azs            = [var.availability_Zone_1, var.availability_Zone_2]
   public_subnets = [var.subnet1_cidr, var.subnet2_cidr]
 
-  # ✅ Important for EKS + networking stability
+  
   enable_dns_hostnames = true
   enable_dns_support   = true
 
@@ -95,7 +95,7 @@ module "eks" {
 }
 
 # -------------------------
-# OUTPUTS (IMPORTANT FOR JENKINS)
+# OUTPUTS for Easy Access
 # -------------------------
 output "cluster_name" {
   value = module.eks.cluster_name
@@ -112,4 +112,3 @@ output "vpc_id" {
 output "public_subnets" {
   value = module.vpc.public_subnets
 }
-
