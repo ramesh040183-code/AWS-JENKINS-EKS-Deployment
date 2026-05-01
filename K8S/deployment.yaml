@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: foodweb1-deployment
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: foodweb1-app
+
+  template:
+    metadata:
+      labels:
+        app: foodweb1-app
+
+    spec:
+      containers:
+        - name: foodweb1-container
+          image: ramesh040183/foodweb1:latest
+          ports:
+            - containerPort: 80
+
