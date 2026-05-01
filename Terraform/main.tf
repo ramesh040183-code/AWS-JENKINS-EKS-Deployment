@@ -8,14 +8,14 @@ terraform {
     }
   }
 
-  # ✅ REQUIRED FOR JENKINS / CI-CD
-  backend "s3" {
-    bucket         = "your-tf-state-bucket"
-    key            = "eks/jenkins/terraform.tfstate"
-    region         = "ap-south-1"
-    dynamodb_table = "terraform-locks"
-    encrypt        = true
-  }
+#   # ✅ REQUIRED FOR JENKINS / CI-CD
+#   backend "s3" {
+#     bucket         = "your-tf-state-bucket"
+#     key            = "eks/jenkins/terraform.tfstate"
+#     region         = "ap-south-1"
+#     dynamodb_table = "terraform-locks"
+#     encrypt        = true
+#   }
 }
 
 provider "aws" {
@@ -112,3 +112,4 @@ output "vpc_id" {
 output "public_subnets" {
   value = module.vpc.public_subnets
 }
+
